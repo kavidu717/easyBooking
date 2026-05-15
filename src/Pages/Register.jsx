@@ -1,9 +1,55 @@
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
+import { useState } from "react";
+import { registerUser } from "../service/authService.js";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+     const navigate = useNavigate();
+  
+   const [name, setName]= useState('');
+   const [email, setEmail]= useState('');
+   const [password, setPassword]= useState('');
+   
+
+ const handleSubmit = async (e) => {
+    e.preventDefault();
+
+   try{
+     
+    const userData = {
+        name,
+        email,
+        password,
+      };
+
+    const response =await registerUser(userData)
+     console.log(response);
+
+
+      if (response === "User registered successfully") {
+      toast.success("User registered successfully 🎉");
+      navigate("/login");
+    }
+
+      
+
+   
+    else if (response === "User already exists") {
+      toast.error("User already exists ⚠️");
+    }
+   }
+   catch(error){
+    console.log(error);
+    toast.error(error.response.data.message);
+   }
+  };
+
+
+
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center">
       {/* Background Image */}
@@ -24,13 +70,15 @@ export default function Register() {
           <p className="text-gray-200 text-sm mt-2">Join our parking community today</p>
         </div>
 
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Name Field */}
           <div className="relative flex items-center">
             <FaUser className="absolute left-4 text-green-400" />
             <input
               type="text"
               placeholder="Full Name"
+              value={name}
+              onChange={(e)=>setName(e.target.value)}
               className="w-full bg-white/20 border border-white/30 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:bg-white/30 transition-all"
             />
           </div>
@@ -41,6 +89,8 @@ export default function Register() {
             <input
               type="email"
               placeholder="Email Address"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               className="w-full bg-white/20 border border-white/30 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:bg-white/30 transition-all"
             />
           </div>
@@ -51,6 +101,8 @@ export default function Register() {
             <input
               type="password"
               placeholder="Password"
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
               className="w-full bg-white/20 border border-white/30 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:bg-white/30 transition-all"
             />
           </div>
