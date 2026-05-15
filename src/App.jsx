@@ -7,6 +7,7 @@ import Login from './Pages/Login'
 
 
 import './App.css'
+import Contact from './Pages/Contact'
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<Home />} />
            <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
+            <Route path="contact" element={<Contact />} />
 
         </Route>
       </Routes>
