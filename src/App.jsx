@@ -8,6 +8,8 @@ import Login from './Pages/Login'
 
 import './App.css'
 import Contact from './Pages/Contact'
+import Place from './Pages/Place'
+import PlaceDetails from './Pages/PlaceDetails'
 
 function App() {
   
@@ -19,6 +21,8 @@ function App() {
            <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="places" element={<Place />} />
+            <Route path="places/:id" element={<PlaceDetails />} />
 
         </Route>
       </Routes>
