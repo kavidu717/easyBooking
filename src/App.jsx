@@ -10,6 +10,7 @@ import './App.css'
 import Contact from './Pages/Contact'
 import Place from './Pages/Place'
 import PlaceDetails from './Pages/PlaceDetails'
+import Profile from './Pages/Profile'
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="places" element={<Place />} />
             <Route path="places/:id" element={<PlaceDetails />} />
+             <Route path="profile" element={<Profile />} />
 
         </Route>
       </Routes>
